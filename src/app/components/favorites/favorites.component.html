@@ -1,0 +1,14 @@
+<div class="favorites-container">
+    <h2>Tus Imágenes Favoritas</h2>
+  
+    <!-- Mostrar mensaje si no hay imágenes favoritas -->
+    <p *ngIf="favoriteImages.length === 0">No tienes imágenes favoritas aún.</p>
+  
+    <!-- Mostrar imágenes favoritas -->
+    <div *ngFor="let image of favoriteImages" class="favorite-item">
+      <img [src]="image.url" [alt]="image.title">
+      <h3>{{ image.title }}</h3>
+      <p>{{ image.description }}</p>
+    </div>
+  </div>
+  

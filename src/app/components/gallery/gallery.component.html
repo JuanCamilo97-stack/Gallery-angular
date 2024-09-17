@@ -1,0 +1,46 @@
+<div class="gallery-header">
+  <h2>Galería de Imágenes</h2>
+  
+
+  <label for="category-select">Filtrar por categoría:</label>
+  <select id="category-select" [(ngModel)]="selectedCategory">
+    <option value="todos">Todos</option>
+    <option value="bosques">Bosques</option>
+    <option value="desiertos">Desiertos</option>
+    <option value="nevados">Nevados</option>
+    <option value="playas">Playas</option>
+  </select>
+
+
+  <button (click)="openFavoritesModal()" class="favorites-button">
+    Ver imágenes favoritas
+  </button>
+</div>
+
+
+<div class="gallery">
+  <div *ngFor="let image of filteredImages" class="gallery-item">
+    <img [src]="image.url" [alt]="image.title" (click)="selectImage(image)">
+    <h3>{{ image.title }}</h3>
+    <p>{{ image.description }}</p>
+    <button (click)="toggleFavorite(image)">
+      {{ isFavorite(image) ? 'Eliminar de Favoritos' : 'Agregar a Favoritos' }}
+    </button>
+  </div>
+</div>
+
+
+<div *ngIf="showFavoritesModal" class="favorites-modal">
+  <div class="modal-content">
+    <h2>Tus Imágenes Favoritas</h2>
+    <button (click)="closeFavoritesModal()" class="close-modal-button">Cerrar</button>
+
+    <div *ngIf="favoriteImages.length === 0">No tienes imágenes favoritas aún.</div>
+
+    <div *ngFor="let image of favoriteImages" class="favorite-item">
+      <img [src]="image.url" [alt]="image.title">
+      <h3>{{ image.title }}</h3>
+      <p>{{ image.description }}</p>
+    </div>
+  </div>
+</div>
